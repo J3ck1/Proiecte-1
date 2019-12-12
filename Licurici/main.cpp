@@ -39,6 +39,21 @@ for (int i = 1; i <= n; i++)
 }
 }
 
+void funct3(int prb)
+{
+    int nr;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j < strlen(date[i]); j++) {
+            nr = (rand() % 100) + 1;
+            if (nr <= prb)
+                date[i][j] = toupper(date[i][j]);
+            else
+                date[i][j] = tolower(date[i][j]);
+        }
+
+    }
+}
+
 int main()
 {
     ifstream fin ("licurici.txt");
