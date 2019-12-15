@@ -1,0 +1,32 @@
+funct5(int tip)
+{
+    int a, b, c, d, rima = 1;
+    if (tip == 1)
+        b = 2, c = 3, d = 4;
+    if (tip == 2)
+        b = 3, c = 2, d = 4;
+    else
+        b = 4, c = 2, d = 3;
+
+    for (int i = 0; i< n/3; i++) {
+        a = i * 4 + i;
+        while (rima) {
+            rima = 0;
+            if (date2[a + 1][lun[a + 1]][strlen(date2[a + 1][lun[a + 1]])] !=
+                date2[a + b][lun[a + b]][strlen(date2[a + b][lun[a + b]])]) {
+                    rima = 1;
+                    for (int j = 1; j <= m; j++)
+                        if (strcmp(date2[a + 1][lun[a + 1]], cuv[j].cuvant) == 0)
+                            strcpy(date2[a + 1][lun[a + 1]], cuv[j].sin);
+            }
+            if (date2[a + c][lun[a + c]][strlen(date2[a + c][lun[a + c]])] !=
+                date2[a + d][lun[a + d]][strlen(date2[a + b][lun[a + b]])]) {
+                    rima = 1;
+                    for (int j = 1; j <= m; j++)
+                        if (strcmp(date2[a + c][lun[a + c]], cuv[j].cuvant) == 0)
+                            strcpy(date2[a + d][lun[a + d]], cuv[j].sin);
+            }
+        }
+
+    }
+}
