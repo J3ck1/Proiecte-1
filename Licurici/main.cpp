@@ -77,13 +77,9 @@ void funct4()
 
     for (int i = 1; i <= n; i++)
         for (int j = 1; j <= lun[i]; j++)
-            for (int z = 1; z <= m; z++) {
-                if (strcmp(date2[i][j], cuv[z].cuvant) == 0) {
+            for (int z = 1; z <= m; z++)
+                if (strcmp(date2[i][j], cuv[z].cuvant) == 0)
                     strcpy(date2[i][j], cuv[z].dmt);
-                    z = m + 1;
-                }
-                z++;
-            }
 }
 
 int main()
@@ -95,8 +91,15 @@ int main()
     ifstream lib ("biblioteca.txt");
     while(lib) {
         lib >> cuv[++m].cuvant >> cuv[m].dmt;
-        //lib >> cuv[m].sin;
+        lib >> cuv[m].sin;
     }
+
     
+    /*for (int i =1; i<=n; i++)
+    {
+        for (int j=1; j<=lun[i]; j++) cout << date2[i][j] << " ";
+        cout << endl;
+    }*/
+
     return 0;
 }
