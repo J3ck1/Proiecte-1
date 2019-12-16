@@ -1,6 +1,8 @@
 funct5(int tip)
 {
-    int a, b, c, d, rima = 1;
+    int a, b, c, d;
+    int i1, i2, i3, i4, i5, i6, i7, i8;
+
     if (tip == 1)
         b = 2, c = 3, d = 4;
     if (tip == 2)
@@ -10,23 +12,23 @@ funct5(int tip)
 
     for (int i = 0; i< n/3; i++) {
         a = i * 4 + i;
-        while (rima) {
-            rima = 0;
-            if (date2[a + 1][lun[a + 1]][strlen(date2[a + 1][lun[a + 1]])] !=
-                date2[a + b][lun[a + b]][strlen(date2[a + b][lun[a + b]])]) {
-                    rima = 1;
-                    for (int j = 1; j <= m; j++)
-                        if (strcmp(date2[a + 1][lun[a + 1]], cuv[j].cuvant) == 0)
-                            strcpy(date2[a + 1][lun[a + 1]], cuv[j].sin);
-            }
-            if (date2[a + c][lun[a + c]][strlen(date2[a + c][lun[a + c]])] !=
-                date2[a + d][lun[a + d]][strlen(date2[a + b][lun[a + b]])]) {
-                    rima = 1;
-                    for (int j = 1; j <= m; j++)
-                        if (strcmp(date2[a + c][lun[a + c]], cuv[j].cuvant) == 0)
-                            strcpy(date2[a + d][lun[a + d]], cuv[j].sin);
-            }
-        }
+        i1 = a + 1;
+        i2 = strlen(date2[i1][lun[i1]]) - 1;
+        i3 = a + b;
+        i4 = strlen(date2[i3][lun[i3]]) - 1;
+        i5 = a + c;
+        i6 = strlen(date2[i5][lun[i5]]) - 1;
+        i7 = a + d;
+        i8 = strlen(date2[i7][lun[i7]]) - 1;
 
+        if (date2[i1][lun[i1]][i2] != date2[i3][lun[i3]][i4]) 
+            for (int j = 1; j <= m; j++)
+                if (strcmp(date2[i1][lun[i1]], cuv[j].dmt) == 0) 
+                    strcpy(date2[i1][lun[i1]], cuv[j].sin);
+                    
+        if (date2[i5][lun[i5]][i6] != date2[i7][lun[i7]][i8]) 
+            for (int j = 1; j <= m; j++)
+                if (strcmp(date2[i5][lun[i5]], cuv[j].dmt) == 0) 
+                            strcpy(date2[i5][lun[i5]], cuv[j].sin);
     }
 }
