@@ -1,64 +1,67 @@
 #include <iostream>
-
+#include <fstream>
+#include <cmath>
 using namespace std;
-int m, c, st[100], date[50][5];
+ifstream fin ("serii.in");
+ofstream fout ("serii.out");
+int N, Q;
 
-//  1 = 1m;
-//  2 = 1c;
-//  3 = 2m;
-//  4 = 2c;
-//  5 = 1c 1m;
-
-void afisare(int k)
+struct matrice
 {
-    for(int i=1; i<=k; i++)
-        cout << st[i] << endl;
+    int n, m;
+    int v[5];
+}a[10000], b[10000];
 
-}
-
-void conv(int k, int v, int x)
-{
-    if(v == 1) date[k][x+1]+=1;
-    if(v == 2) date[k][x+2]+=1;
-    if(v == 3) date[k][x+1]+=2;
-    if(v == 4) date[k][x+2]+=2;
-    if(v == 5) {
-            date[k][x+2]+=1;
-            date[k][x+1]+=1;
-    }
-}
-
-bool valid(int k)
-{
-    if(k%2 == 1)
-        conv(k, st[k], 2);
+int baza2(int &dms) {
+    int nr = 0, n, i, x;
+    if (dms <= 25)
+        n = dms;
     else
-        conv(k, st[k], 0);
-    if(date[k][1] < date[k][2] && date[k][1] != 0) return 0;
-    if(date[k][3] < date[k][4] && date[k][3] != 0) return 0;
-    return 1;
-}
-
-void backy()
-{
-  int k = 1;
-  st[k] = 0;
-  while (k > 0)
-    if (st[k] < 5)
-    {
-      st[k]++;
-      if (valid(k))
-        if(date[k][1] == 0)
-            afisare(k);
-        else st[++k]=0;
+        n = 25;
+    dms-=n;
+    for (i = n - 1; i >= 0; i--) {
+        fin >> x;
+        nr += x * pow(2, i);
     }
-    else k--;
+    return nr;
 }
 int main()
 {
-    cin >> m >> c;
-    date[0][1] = m;
-    date[0][2] = c;
-    backy();
+    fin >> N;
+    int j = 0, dms, val, k = 0;
+
+    for (int i = 0; i < N; i++) {
+        j = 0;
+        fin >> a[i].n >> a[i].m;
+        dms = a[i].n * a[i].m;
+        while(dms > 0)
+            a[i].v[++j] = baza2(dms);
+    }
+
+    fin >> Q;
+    for (int i = 0; i < Q; i++) {
+        j = 0;
+        fin >> b[i].n >> b[i].m;
+        dms = b[i].n * b[i].m;
+        while(dms > 0)
+            b[i].v[++j] = baza2(dms);
+    }
+
+    for (int i = 0; i < Q; i++) {
+        for (int j = 0; j < N; j++) {
+            if (b[i].n == a[j].n && b[i].m == a[j].m) {
+                val = 1;
+                for (int z = 1; z <= 4; z++) {
+                    if (b[i].v[z] != a[j].v[z])
+                        val = 0;
+                }
+                if (val) {
+                    b[i].n = b[i].m = 0;
+                    k++;
+                }
+            }
+        }
+    }
+    cout << k;
     return 0;
 }
